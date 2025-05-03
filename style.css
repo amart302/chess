@@ -1,0 +1,298 @@
+:root {
+  --primary-color: #4a6fa5;
+  --secondary-color: #ff7e5f;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --board-light: #f0d9b5;
+  --board-dark: #b58863;
+  --highlight-color: #7fdbff;
+  --success-color: hsl(88, 62%, 41%);
+  --text-color: #2c3e50;
+  --text-light: #f8f9fa;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: hsl(30deg 9.52% 8.24%);;
+  height: calc(100vh - 2rem);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.page__title {
+  margin: 1rem 0 2rem;
+  font-size: 2.75rem;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+}
+
+.page__status {
+  margin: 1.5rem 0;
+  font-size: 1.35rem;
+  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.page__current-player {
+  font-weight: 700;
+  text-transform: capitalize;
+  color: var(--primary-color);
+}
+
+.game {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chess-board {
+  position: relative;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.chess-board__inner {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(50px, 70px));
+  grid-template-rows: repeat(8, minmax(50px, 70px));
+  border: 2px solid var(--dark-color);
+  border-radius: 0.5rem;
+  background-color: var(--board-dark);
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.chess-board__cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.chess-board__cell--white {
+  background-color: var(--board-light);
+}
+
+.chess-board__cell--black {
+  background-color: var(--board-dark);
+}
+
+.chess-board__cell:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+.chess-board__cell--possible {
+  background-color: var(--success-color) !important;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.chess-board__cell--possible::after {
+  content: '';
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+}
+
+.chess-board__piece {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  transition: all 0.2s ease;
+  z-index: 3;
+  user-select: none;
+  filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.3));
+  width: 80%;
+  height: 80%;
+}
+
+.chess-board__piece img {
+  width: 45px;
+  height: 45px;
+}
+
+.chess-board__piece:active {
+  transform: scale(1.2);
+  cursor: grabbing;
+}
+
+.chess-board__labels {
+  position: absolute;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+.chess-board__labels--rows {
+  top: 1.5rem;
+  left: 0.5rem;
+  height: calc(100% - 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 0.5rem;
+}
+
+.chess-board__labels--cols {
+  bottom: 0.5rem;
+  left: 1.5rem;
+  width: calc(100% - 3rem);
+  display: flex;
+  justify-content: space-around;
+}
+
+.game__captured {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  width: 10rem;
+  min-height: 12rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+.game__captured-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.game__captured-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.captured-pieces__piece img {
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.captured-pieces__piece:hover img {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal--visible {
+  display: flex;
+  opacity: 1;
+}
+
+.modal__content {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+  max-width: 90%;
+  width: 26rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal--visible .modal__content {
+  transform: translateY(0);
+}
+
+.modal__title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.modal__button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow);
+  margin-top: 1rem;
+}
+
+.modal__button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal__pieces {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.modal__piece {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.modal__piece img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.modal__piece:hover {
+  transform: scale(1.15);
+  background: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Шахматы</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page">
+    <h1 class="page__title">Шахматы</h1>
+    <div class="game">
+      <div class="game__captured game__captured--white">
+        <div class="game__captured-title">Съедено белыми</div>
+        <div class="game__captured-list" id="white-captured"></div>
+      </div>
+      <div class="chess-board">
+        <div class="chess-board__inner" id="board"></div>
+        <div class="chess-board__labels chess-board__labels--rows"></div>
+        <div class="chess-board__labels chess-board__labels--cols"></div>
+      </div>
+      <div class="game__captured game__captured--black">
+        <div class="game__captured-title">Съедено черными</div>
+        <div class="game__captured-list" id="black-captured"></div>
+      </div>
+    </div>
+    <p class="page__status">
+      Ход: <span class="page__current-player" id="current-player">white</span>
+    </p>
+    <div class="modal modal--hidden" id="game-over-modal">
+      <div class="modal__content">
+        <div class="modal__title" id="modal-title"></div>
+        <button class="modal__button" id="new-game">Новая игра</button>
+      </div>
+    </div>
+    <div class="modal modal--hidden" id="promotion-modal">
+      <div class="modal__content">
+        <div class="modal__title">Выберите фигуру</div>
+        <div class="modal__pieces" id="promotion-pieces"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
