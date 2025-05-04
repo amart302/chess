@@ -455,6 +455,20 @@ class Game {
         this.completeMove();
       }
     }
+    const board = document.getElementById("board");
+    const shapes = document.querySelectorAll(".chess-board__piece");
+
+    if(this.currentPlayer == "black"){
+      board.style.transform = "rotate(180deg)";
+      shapes.forEach(item => {
+        item.style.transform = "rotate(180deg)";
+      });
+    }else{
+      board.style.transform = "rotate(0deg)";
+      shapes.forEach(item => {
+        item.style.transform = "rotate(0deg)";
+      });
+    }
   }
 
   completeMove() {
