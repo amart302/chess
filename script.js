@@ -484,11 +484,7 @@ class Game {
     modal.classList.add("modal--visible");
 
     document.getElementById("new-game").addEventListener("click", () => {
-      this.board = new Board();
-      this.currentPlayer = "white";
-      document.getElementById("current-player").textContent = "white";
-      this.board.render();
-      modal.classList.remove("modal--visible");
+      window.location.reload();
     });
   }
 
